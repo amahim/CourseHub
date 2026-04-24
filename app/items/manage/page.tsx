@@ -15,34 +15,34 @@ export default function ManageItemsPage() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Redirect if not logged in
-  if (!user) {
-    router.push("/login");
-    return null;
-  }
-
   useEffect(() => {
-    fetchCourses();
-  }, []);
-
-  const fetchCourses = async () => {
-    try {
-      const response = await fetch("/api/courses");
-      if (response.ok) {
-        const data = await response.json();
-        setCourses(data.courses || []);
-      } else {
-        toast.error("Failed to load courses");
-        setCourses([]);
-      }
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-      toast.error("Failed to connect to database");
-      setCourses([]);
-    } finally {
-      setLoading(false);
+    // Redirect if not logged in
+    if (!user) {
+      router.push("/login");
+      return;
     }
-  };
+
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch("/api/courses");
+        if (response.ok) {
+          const data = await response.json();
+          setCourses(data.courses || []);
+        } else {
+          toast.error("Failed to load courses");
+          setCourses([]);
+        }
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        toast.error("Failed to connect to database");
+        setCourses([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, [user, router]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this course?")) {

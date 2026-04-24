@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Error({
   error,
   reset,
@@ -21,9 +23,9 @@ export default function Error({
           <button onClick={() => reset()} className="btn-primary">
             Try Again
           </button>
-          <a href="/" className="btn-secondary">
+          <Link href="/" className="btn-secondary">
             Go Home
-          </a>
+          </Link>
         </div>
       </div>
     </div>

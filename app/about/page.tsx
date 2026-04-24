@@ -202,12 +202,12 @@ export default function AboutPage() {
             Join thousands of students already learning on CourseHub
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+            <Link
               href="/items"
               className="btn-primary bg-white text-primary-700 hover:bg-primary-50"
             >
               Browse Courses
-            </a>
+            </Link>
             <a
               href="/register"
               className="btn-secondary border-white text-blue-700 hover:bg-white/10"
