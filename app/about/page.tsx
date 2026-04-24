@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { Target, Eye, Award, Users, BookOpen, Globe } from "lucide-react";
 

@@ -42,9 +42,10 @@ async function getRelatedCourses(category: string, currentId: string) {
 export default async function ItemDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const course = await getCourse(params.id);
+  const { id } = await params;
+  const course = await getCourse(id);
 
   if (!course) {
     notFound();
@@ -166,7 +167,7 @@ export default async function ItemDetailsPage({
                 What You&apos;ll Learn
               </h2>
               <div className="grid md:grid-cols-2 gap-4">
-                {course.features.map((feature, index) => (
+                {course.features.map((feature: string, index: number) => (
                   <div key={index} className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                     <span className="text-gray-700">{feature}</span>
@@ -182,7 +183,7 @@ export default async function ItemDetailsPage({
                   Related Courses
                 </h2>
                 <div className="grid md:grid-cols-3 gap-6">
-                  {relatedCourses.map((relatedCourse) => (
+                  {relatedCourses.map((relatedCourse: any) => (
                     <Link
                       href={`/items/${relatedCourse.id}`}
                       key={relatedCourse.id}

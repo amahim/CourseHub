@@ -4,13 +4,14 @@ import clientPromise from "@/lib/mongodb";
 // GET - Fetch a single course
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB || "coursehub");
 
-    const course = await db.collection("courses").findOne({ id: params.id });
+    const course = await db.collection("courses").findOne({ id });
 
     if (!course) {
       return NextResponse.json({ error: "Course not found" }, { status: 404 });
@@ -30,19 +31,20 @@ export async function GET(
 // PUT - Update a course
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB || "coursehub");
 
     const body = await request.json();
-    const { id, ...updateData } = body;
+    const { id: _id, ...updateData } = body;
 
     const result = await db
       .collection("courses")
       .updateOne(
-        { id: params.id },
+        { id },
         { $set: { ...updateData, updatedAt: new Date().toISOString() } },
       );
 
@@ -66,13 +68,14 @@ export async function PUT(
 // DELETE - Delete a course
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB || "coursehub");
 
-    const result = await db.collection("courses").deleteOne({ id: params.id });
+    const result = await db.collection("courses").deleteOne({ id });
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ error: "Course not found" }, { status: 404 });
