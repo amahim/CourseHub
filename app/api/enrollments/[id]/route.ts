@@ -5,9 +5,10 @@ import { ObjectId } from "mongodb";
 // PUT - Update enrollment progress
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB || "coursehub");
 
@@ -29,7 +30,7 @@ export async function PUT(
 
     const result = await db
       .collection("enrollments")
-      .updateOne({ _id: new ObjectId(params.id) }, { $set: updateData });
+      .updateOne({ _id: new ObjectId(id) }, { $set: updateData });
 
     if (result.matchedCount === 0) {
       return NextResponse.json(
@@ -51,15 +52,16 @@ export async function PUT(
 // DELETE - Remove enrollment
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB || "coursehub");
 
     const result = await db
       .collection("enrollments")
-      .deleteOne({ _id: new ObjectId(params.id) });
+      .deleteOne({ _id: new ObjectId(id) });
 
     if (result.deletedCount === 0) {
       return NextResponse.json(
