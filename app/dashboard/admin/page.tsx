@@ -82,17 +82,17 @@ export default function AdminDashboard() {
   useEffect(() => {
     // Wait for auth to finish loading
     if (authLoading) return;
-    
+
     if (!user) {
       router.push("/login?redirect=/dashboard/admin");
       return;
     }
-    
+
     if (userRole && userRole !== "admin") {
       router.push("/dashboard/user");
       return;
     }
-    
+
     loadData();
   }, [user, userRole, authLoading, router]);
 

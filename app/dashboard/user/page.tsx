@@ -69,12 +69,12 @@ export default function UserDashboard() {
   useEffect(() => {
     // Wait for auth to finish loading
     if (authLoading) return;
-    
+
     if (!user) {
       router.push("/login?redirect=/dashboard/user");
       return;
     }
-    
+
     fetch("/api/courses")
       .then((r) => r.json())
       .then((d) => setMyCourses((d.courses || []).slice(0, 5)))
