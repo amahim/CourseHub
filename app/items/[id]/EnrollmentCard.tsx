@@ -11,6 +11,8 @@ interface EnrollmentCardProps {
     id: string;
     title: string;
     price: number;
+    image?: string;
+    category?: string;
   };
 }
 
@@ -19,6 +21,7 @@ export default function EnrollmentCard({ course }: EnrollmentCardProps) {
   const router = useRouter();
   const [enrolling, setEnrolling] = useState(false);
   const [wishlisting, setWishlisting] = useState(false);
+  const [wishlisted, setWishlisted] = useState(false);
 
   const handleEnroll = async () => {
     if (!user) {
@@ -61,12 +64,35 @@ export default function EnrollmentCard({ course }: EnrollmentCardProps) {
       return;
     }
 
+    if (wishlisted) {
+      toast("Already in your wishlist!");
+      return;
+    }
+
     setWishlisting(true);
     try {
-      // TODO: Implement wishlist API
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      toast.success("Added to wishlist!");
-    } catch (error) {
+      const res = await fetch("/api/wishlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user.uid,
+          courseId: course.id,
+          courseName: course.title,
+          courseImage: course.image || "",
+          coursePrice: course.price,
+          courseCategory: course.category || "",
+        }),
+      });
+      if (res.ok) {
+        toast.success("Added to wishlist!");
+        setWishlisted(true);
+      } else if (res.status === 409) {
+        toast("Already in your wishlist!");
+        setWishlisted(true);
+      } else {
+        toast.error("Failed to add to wishlist");
+      }
+    } catch {
       toast.error("Failed to add to wishlist");
     } finally {
       setWishlisting(false);
@@ -94,11 +120,15 @@ export default function EnrollmentCard({ course }: EnrollmentCardProps) {
       </button>
       <button
         onClick={handleWishlist}
-        disabled={wishlisting}
-        className="btn-secondary w-full dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled={wishlisting || wishlisted}
+        className={`w-full flex items-center justify-center gap-2 disabled:cursor-not-allowed ${wishlisted ? "btn-secondary bg-pink-50 dark:bg-pink-900/20 text-pink-600 dark:text-pink-400 border-pink-200 dark:border-pink-700" : "btn-secondary dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"} disabled:opacity-70`}
       >
-        <Heart className="h-4 w-4" />
-        {wishlisting ? "Adding..." : "Add to Wishlist"}
+        <Heart className={`h-4 w-4 ${wishlisted ? "fill-current" : ""}`} />
+        {wishlisting
+          ? "Adding..."
+          : wishlisted
+            ? "In Wishlist"
+            : "Add to Wishlist"}
       </button>
       <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
         <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">

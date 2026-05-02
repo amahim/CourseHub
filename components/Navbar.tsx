@@ -155,23 +155,25 @@ export default function Navbar() {
                       <User className="h-4 w-4" />
                       <span>My Profile</span>
                     </Link>
-                    <Link
-                      href="/items/add"
-                      className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                      onClick={() => setIsDropdownOpen(false)}
-                    >
-                      <Plus className="h-4 w-4" />
-                      <span>Add Course</span>
-                    </Link>
                     {userRole === "admin" && (
-                      <Link
-                        href="/dashboard/admin"
-                        className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                        onClick={() => setIsDropdownOpen(false)}
-                      >
-                        <Shield className="h-4 w-4" />
-                        <span>Admin Panel</span>
-                      </Link>
+                      <>
+                        <Link
+                          href="/items/add"
+                          className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                          onClick={() => setIsDropdownOpen(false)}
+                        >
+                          <Plus className="h-4 w-4" />
+                          <span>Add Course</span>
+                        </Link>
+                        <Link
+                          href="/items/manage"
+                          className="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                          onClick={() => setIsDropdownOpen(false)}
+                        >
+                          <Shield className="h-4 w-4" />
+                          <span>Manage Courses</span>
+                        </Link>
+                      </>
                     )}
                     <hr className="my-1 border-gray-100 dark:border-gray-700" />
                     <button
@@ -255,14 +257,16 @@ export default function Navbar() {
                       <User className="h-4 w-4" />
                       <span>My Profile</span>
                     </Link>
-                    <Link
-                      href="/items/add"
-                      className="flex items-center space-x-3 px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <Plus className="h-4 w-4" />
-                      <span>Add Course</span>
-                    </Link>
+                    {userRole === "admin" && (
+                      <Link
+                        href="/items/add"
+                        className="flex items-center space-x-3 px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Plus className="h-4 w-4" />
+                        <span>Add Course</span>
+                      </Link>
+                    )}
                     <button
                       onClick={() => {
                         logout();

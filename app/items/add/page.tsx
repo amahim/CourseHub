@@ -27,7 +27,7 @@ const CATEGORIES = [
 const LEVELS = ["Beginner", "Intermediate", "Advanced"];
 
 export default function AddItemPage() {
-  const { user, loading: authLoading } = useAuth();
+  const { user, userRole, loading: authLoading } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -57,6 +57,11 @@ export default function AddItemPage() {
 
   if (!user) {
     router.push("/login?redirect=/items/add");
+    return null;
+  }
+
+  if (userRole && userRole !== "admin") {
+    router.push("/dashboard/user");
     return null;
   }
 

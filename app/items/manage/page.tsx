@@ -9,7 +9,7 @@ import { Plus, Eye, Trash2, Search, BookOpen, Users, Star } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function ManageItemsPage() {
-  const { user, loading: authLoading } = useAuth();
+  const { user, userRole, loading: authLoading } = useAuth();
   const router = useRouter();
   const [courses, setCourses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -21,6 +21,11 @@ export default function ManageItemsPage() {
 
     if (!user) {
       router.push("/login?redirect=/items/manage");
+      return;
+    }
+
+    if (userRole && userRole !== "admin") {
+      router.push("/dashboard/user");
       return;
     }
 

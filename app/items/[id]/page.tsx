@@ -101,6 +101,8 @@ export default async function ItemDetailsPage({
                 id: course.id,
                 title: course.title,
                 price: course.price,
+                image: course.image,
+                category: course.category,
               }}
             />
           </div>
