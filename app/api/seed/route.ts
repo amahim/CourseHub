@@ -313,54 +313,296 @@ const seedCourses = [
   },
 ];
 
-// GET - Seed the database with initial courses
+const seedBlogPosts = [
+  {
+    id: "1",
+    title: "10 Essential Web Development Skills for 2024",
+    slug: "web-development-skills-2024",
+    category: "Web Development",
+    author: "Dr. Angela Yu",
+    authorImage:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop",
+    excerpt:
+      "Stay ahead in 2024 by mastering these essential web development skills that every developer needs to know.",
+    content:
+      "The world of web development is evolving faster than ever. In 2024, mastering TypeScript, React Server Components, edge computing, and accessibility are no longer optional — they're essential. This guide walks you through the top 10 skills demanded by leading tech companies...",
+    readTime: "8 min read",
+    featured: true,
+    publishedAt: new Date("2024-03-01").toISOString(),
+    createdAt: new Date("2024-03-01").toISOString(),
+  },
+  {
+    id: "2",
+    title: "How to Break into Data Science in 6 Months",
+    slug: "break-into-data-science",
+    category: "Data Science",
+    author: "Andrew Chen",
+    authorImage:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop",
+    excerpt:
+      "A practical roadmap to land your first data science job within 6 months, even if you're starting from scratch.",
+    content:
+      "Data science is one of the most in-demand fields today. But how do you get started when there's so much to learn? This article presents a 6-month structured roadmap — from Python basics to machine learning models and your first interview...",
+    readTime: "12 min read",
+    featured: false,
+    publishedAt: new Date("2024-02-20").toISOString(),
+    createdAt: new Date("2024-02-20").toISOString(),
+  },
+  {
+    id: "3",
+    title: "Design Principles Every Developer Should Know",
+    slug: "design-principles-for-developers",
+    category: "Design",
+    author: "Sarah Mitchell",
+    authorImage:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&auto=format&fit=crop",
+    excerpt:
+      "Good design isn't just for designers. Learn the key principles that will make your applications more beautiful and usable.",
+    content:
+      "Developers who understand design stand out. This article covers the core principles — visual hierarchy, color theory, whitespace, typography — that you can apply immediately to transform how your UIs look and feel...",
+    readTime: "7 min read",
+    featured: false,
+    publishedAt: new Date("2024-02-10").toISOString(),
+    createdAt: new Date("2024-02-10").toISOString(),
+  },
+  {
+    id: "4",
+    title: "The Future of AI in Online Education",
+    slug: "ai-future-online-education",
+    category: "AI/ML",
+    author: "Michael Torres",
+    authorImage:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop",
+    excerpt:
+      "Artificial intelligence is reshaping how we learn. Here's what the future of education looks like with AI-driven personalization.",
+    content:
+      "AI tutors, adaptive learning paths, instant feedback — the future of education is being rewritten by machine learning. Platforms are increasingly using AI to detect learning gaps, recommend content, and personalize the learning experience at scale...",
+    readTime: "10 min read",
+    featured: false,
+    publishedAt: new Date("2024-01-28").toISOString(),
+    createdAt: new Date("2024-01-28").toISOString(),
+  },
+  {
+    id: "5",
+    title: "Building Your Personal Brand as a Developer",
+    slug: "personal-brand-developer",
+    category: "Career",
+    author: "Jessica Lee",
+    authorImage:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&auto=format&fit=crop",
+    excerpt:
+      "Your GitHub profile, blog, and social presence are your portfolio. Learn how to build a brand that attracts opportunities.",
+    content:
+      "In today's market, technical skills alone won't land you your dream job. A strong personal brand — consistent GitHub contributions, a thoughtful blog, a compelling LinkedIn — sets you apart. Here's how to build yours systematically...",
+    readTime: "6 min read",
+    featured: false,
+    publishedAt: new Date("2024-01-15").toISOString(),
+    createdAt: new Date("2024-01-15").toISOString(),
+  },
+  {
+    id: "6",
+    title: "Cloud vs. On-Premise: Which is Right for Your Business?",
+    slug: "cloud-vs-on-premise",
+    category: "Cloud",
+    author: "Raj Patel",
+    authorImage:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop",
+    excerpt:
+      "The cloud vs. on-premise debate continues. We break down the costs, security, and scalability considerations for 2024.",
+    content:
+      "Migrating to the cloud offers agility and cost savings — but it's not always the right move. For businesses with strict compliance requirements, on-premise infrastructure may still be the answer. We compare the two approaches across six dimensions...",
+    readTime: "9 min read",
+    featured: false,
+    publishedAt: new Date("2024-01-05").toISOString(),
+    createdAt: new Date("2024-01-05").toISOString(),
+  },
+];
+
+const seedReviews = [
+  {
+    courseId: "1",
+    userId: "demo-user-001",
+    userName: "Alex Johnson",
+    rating: 5,
+    comment:
+      "Absolutely fantastic course! The projects are real-world and the instructor explains everything clearly. Best investment I've made.",
+    createdAt: new Date("2024-03-05").toISOString(),
+  },
+  {
+    courseId: "1",
+    userId: "demo-user-002",
+    userName: "Maria Garcia",
+    rating: 4,
+    comment:
+      "Very comprehensive content. The React section is especially thorough. A few videos could be more concise but overall excellent.",
+    createdAt: new Date("2024-03-08").toISOString(),
+  },
+  {
+    courseId: "1",
+    userId: "demo-user-003",
+    userName: "James Wilson",
+    rating: 5,
+    comment:
+      "I got my first dev job after completing this bootcamp. The portfolio projects really made a difference in interviews.",
+    createdAt: new Date("2024-03-12").toISOString(),
+  },
+  {
+    courseId: "2",
+    userId: "demo-user-004",
+    userName: "Priya Sharma",
+    rating: 5,
+    comment:
+      "The best Python course out there. OOP patterns and data structures are covered in depth with perfect examples.",
+    createdAt: new Date("2024-03-03").toISOString(),
+  },
+  {
+    courseId: "2",
+    userId: "demo-user-005",
+    userName: "David Kim",
+    rating: 4,
+    comment:
+      "Great advanced content. Would love more exercises but the explanations are crystal clear.",
+    createdAt: new Date("2024-03-10").toISOString(),
+  },
+  {
+    courseId: "3",
+    userId: "demo-user-006",
+    userName: "Sophie Chen",
+    rating: 5,
+    comment:
+      "Sarah is an amazing teacher! I went from knowing nothing about UX to landing a junior design role. Highly recommend.",
+    createdAt: new Date("2024-02-28").toISOString(),
+  },
+  {
+    courseId: "4",
+    userId: "demo-user-007",
+    userName: "Carlos Rivera",
+    rating: 5,
+    comment:
+      "Andrew's teaching style is unmatched. Complex ML concepts made accessible with great visual explanations.",
+    createdAt: new Date("2024-03-01").toISOString(),
+  },
+  {
+    courseId: "5",
+    userId: "demo-user-008",
+    userName: "Emma Thompson",
+    rating: 4,
+    comment:
+      "Solid React Native fundamentals. The app store deployment section saved me hours of confusion.",
+    createdAt: new Date("2024-03-07").toISOString(),
+  },
+];
+
+const seedAdminUser = {
+  uid: "admin-firebase-uid",
+  email: "admin@coursehub.com",
+  displayName: "Admin User",
+  role: "admin",
+  createdAt: new Date().toISOString(),
+};
+
+// GET - Seed the database with initial courses, blog posts, reviews, and admin user
 export async function GET() {
   try {
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB || "coursehub");
 
-    const existing = await db.collection("courses").countDocuments();
-    if (existing > 0) {
-      return NextResponse.json({
-        message: `Database already has ${existing} courses. Skipping seed.`,
-        count: existing,
-      });
+    const results: Record<string, string> = {};
+
+    // Courses
+    const existingCourses = await db.collection("courses").countDocuments();
+    if (existingCourses === 0) {
+      await db.collection("courses").insertMany(seedCourses);
+      results.courses = `Seeded ${seedCourses.length} courses`;
+    } else {
+      results.courses = `Skipped (${existingCourses} existing)`;
     }
 
-    await db.collection("courses").insertMany(seedCourses);
+    // Blog posts
+    const existingBlogs = await db.collection("blog_posts").countDocuments();
+    if (existingBlogs === 0) {
+      await db.collection("blog_posts").insertMany(seedBlogPosts);
+      results.blog_posts = `Seeded ${seedBlogPosts.length} posts`;
+    } else {
+      results.blog_posts = `Skipped (${existingBlogs} existing)`;
+    }
 
-    return NextResponse.json({
-      success: true,
-      message: `Successfully seeded ${seedCourses.length} courses`,
-      count: seedCourses.length,
-    });
+    // Reviews
+    const existingReviews = await db.collection("reviews").countDocuments();
+    if (existingReviews === 0) {
+      await db.collection("reviews").insertMany(seedReviews);
+      results.reviews = `Seeded ${seedReviews.length} reviews`;
+    } else {
+      results.reviews = `Skipped (${existingReviews} existing)`;
+    }
+
+    // Admin user (upsert by email)
+    await db
+      .collection("users")
+      .updateOne(
+        { email: seedAdminUser.email },
+        { $setOnInsert: seedAdminUser },
+        { upsert: true },
+      );
+    results.admin_user = "Upserted admin@coursehub.com with role: admin";
+
+    return NextResponse.json({ success: true, results });
   } catch (error) {
-    console.error("Error seeding courses:", error);
+    console.error("Error seeding database:", error);
     return NextResponse.json(
-      { error: "Failed to seed courses" },
+      { error: "Failed to seed database" },
       { status: 500 },
     );
   }
 }
 
-// POST - Force re-seed (drops existing and re-inserts)
+// POST - Force re-seed (drops existing and re-inserts all collections)
 export async function POST() {
   try {
     const client = await clientPromise;
     const db = client.db(process.env.MONGODB_DB || "coursehub");
 
     await db.collection("courses").deleteMany({});
+    await db.collection("blog_posts").deleteMany({});
+    await db.collection("reviews").deleteMany({});
+
     await db.collection("courses").insertMany(seedCourses);
+    await db.collection("blog_posts").insertMany(seedBlogPosts);
+    await db.collection("reviews").insertMany(seedReviews);
+    await db
+      .collection("users")
+      .updateOne(
+        { email: seedAdminUser.email },
+        { $set: seedAdminUser },
+        { upsert: true },
+      );
 
     return NextResponse.json({
       success: true,
-      message: `Successfully re-seeded ${seedCourses.length} courses`,
-      count: seedCourses.length,
+      message: "Force re-seeded all collections",
+      counts: {
+        courses: seedCourses.length,
+        blog_posts: seedBlogPosts.length,
+        reviews: seedReviews.length,
+        admin_user: 1,
+      },
     });
   } catch (error) {
-    console.error("Error re-seeding courses:", error);
+    console.error("Error re-seeding database:", error);
     return NextResponse.json(
-      { error: "Failed to re-seed courses" },
+      { error: "Failed to re-seed database" },
       { status: 500 },
     );
   }

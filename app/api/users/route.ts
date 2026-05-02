@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
           lastLogin: new Date().toISOString(),
         },
         $setOnInsert: {
+          role: "user", // Default role for new users
           createdAt: new Date().toISOString(),
         },
       },
@@ -62,7 +63,13 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ user });
+    // Serialize MongoDB _id to string
+    const serializedUser = {
+      ...user,
+      _id: user._id.toString(),
+    };
+
+    return NextResponse.json({ user: serializedUser });
   } catch (error) {
     console.error("Error fetching user:", error);
     return NextResponse.json(

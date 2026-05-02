@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Target, Eye, Award, Users, BookOpen, Globe } from "lucide-react";
 
 export default function AboutPage() {
+  // Dark mode version — all sections have dark: variants
   const values = [
     {
       icon: Target,
@@ -56,9 +57,9 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-20">
+      <div className="bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-900 dark:to-gray-900 text-white py-20">
         <div className="container-custom text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             About CourseHub
@@ -71,14 +72,14 @@ export default function AboutPage() {
       </div>
 
       {/* Story Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-white dark:bg-gray-900">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
                 Our Story
               </h2>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
+              <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
                 <p>
                   CourseHub was founded in 2020 with a simple yet powerful
                   vision: to make quality education accessible to everyone,
@@ -100,7 +101,7 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
+            <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl">
               <Image
                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop"
                 alt="Students learning"
@@ -113,26 +114,31 @@ export default function AboutPage() {
       </section>
 
       {/* Mission, Vision, Values */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-gray-50 dark:bg-gray-950">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               What Drives Us
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Our core principles that guide everything we do
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {values.map((value, index) => (
-              <div key={index} className="card p-8 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-full mb-6">
-                  <value.icon className="h-8 w-8 text-primary-600" />
+              <div
+                key={index}
+                className="card dark:bg-gray-800 dark:border-gray-700 p-8 text-center"
+              >
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-2xl mb-6">
+                  <value.icon className="h-8 w-8 text-primary-600 dark:text-primary-400" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                   {value.title}
                 </h3>
-                <p className="text-gray-600">{value.description}</p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {value.description}
+                </p>
               </div>
             ))}
           </div>
@@ -140,12 +146,12 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="section-padding bg-primary-600 text-white">
+      <section className="section-padding bg-primary-600 dark:bg-primary-900 text-white">
         <div className="container-custom">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl mb-4">
                   <stat.icon className="h-8 w-8" />
                 </div>
                 <div className="text-4xl font-bold mb-2">{stat.value}</div>
@@ -157,19 +163,22 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-white dark:bg-gray-900">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Meet Our Leadership
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Experienced professionals dedicated to your success
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <div key={index} className="card overflow-hidden group">
+              <div
+                key={index}
+                className="card dark:bg-gray-800 dark:border-gray-700 overflow-hidden group"
+              >
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={member.image}
@@ -179,13 +188,15 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="p-6 text-center">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                     {member.name}
                   </h3>
-                  <div className="text-primary-600 font-medium mb-3">
+                  <div className="text-primary-600 dark:text-primary-400 font-medium mb-3">
                     {member.role}
                   </div>
-                  <p className="text-gray-600 text-sm">{member.bio}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {member.bio}
+                  </p>
                 </div>
               </div>
             ))}
@@ -194,7 +205,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+      <section className="section-padding bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-900 dark:to-gray-900 text-white">
         <div className="container-custom text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Start Learning?
@@ -209,12 +220,12 @@ export default function AboutPage() {
             >
               Browse Courses
             </Link>
-            <a
+            <Link
               href="/register"
-              className="btn-secondary border-white text-blue-700 hover:bg-white/10"
+              className="px-6 py-3 rounded-xl border-2 border-white text-white hover:bg-white/10 font-semibold transition-colors"
             >
               Sign Up Free
-            </a>
+            </Link>
           </div>
         </div>
       </section>
